@@ -2,11 +2,14 @@ package br.com.caelum.controlesalas.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Computador {
@@ -15,28 +18,38 @@ public class Computador {
     @GeneratedValue
     private Long id;
     
-    @NotEmpty
+    @NotBlank
     private String configuracao;
     
-    @NotEmpty
+    @NotBlank
     @Column(unique = true)
     private String numeroDeSerie;
     
     private String observacoes;
     
+    @NotNull
     @ManyToOne
     private Sala sala;
 
-    @NotEmpty
-    private String modelo;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Modelo modelo;
+    
+    private int numeroNaSala;
 
-    public Computador(String numeroDeSerie, Sala sala, String modelo, String configuracao, String observacoes) {
+    public Computador(String numeroDeSerie, Sala sala, Modelo modelo, String configuracao, String observacoes, String numeroNaSala) {
 	this.numeroDeSerie = numeroDeSerie;
 	this.sala = sala;
 	this.modelo = modelo;
 	this.configuracao = configuracao;
 	this.observacoes = observacoes;
-
+    }
+    
+    /**
+     * @deprecated
+     */
+    public Computador() {
+	// TODO Auto-generated constructor stub
     }
 
     public Long getId() {
@@ -79,12 +92,20 @@ public class Computador {
         this.sala = sala;
     }
 
-    public String getModelo() {
+    public Modelo getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
+    public void setModelo(Modelo modelo) {
         this.modelo = modelo;
+    }
+
+    public int getNumeroNaSala() {
+	return numeroNaSala;
+    }
+
+    public void setNumeroNaSala(int numeroNaSala) {
+	this.numeroNaSala = numeroNaSala;
     }
 
 }
