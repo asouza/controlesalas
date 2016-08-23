@@ -5,13 +5,13 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.caelum.controlesalas.dao.ComputadorDao;
 import br.com.caelum.controlesalas.dao.SalaDao;
 import br.com.caelum.controlesalas.modelo.Computador;
+import br.com.caelum.controlesalas.modelo.Modelo;
 import br.com.caelum.controlesalas.modelo.Sala;
 
 @Controller
@@ -47,14 +47,14 @@ public class HomeController {
 	try(Scanner scanner = new Scanner(computadores)) {
 	    while(scanner.hasNextLine()){
 		StringTokenizer stringTokenizer = new StringTokenizer(scanner.nextLine(),",");
-		
+		String numeroNaSala = stringTokenizer.nextToken();
 		String numeroDeSerie = stringTokenizer.nextToken();
 		String nomeDaSala = stringTokenizer.nextToken();
 		Sala sala = salaDao.findByNome(nomeDaSala);
-		String modelo = stringTokenizer.nextToken();
+		Modelo modelo = Modelo.valueOf(stringTokenizer.nextToken().toUpperCase());
 		String configuracao = stringTokenizer.nextToken();
 		String observacao = stringTokenizer.nextToken();
-		Computador computador = new Computador(numeroDeSerie, sala, modelo, configuracao, observacao);
+		Computador computador = new Computador(numeroDeSerie, sala, modelo, configuracao, observacao, numeroNaSala);
 		computadorDao.save(computador);
 	    }
 	}

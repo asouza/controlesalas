@@ -29,6 +29,12 @@ public class Sala {
     public Sala() {
 	// TODO Auto-generated constructor stub
     }
+    
+    public Long getId() {
+	return id;
+    }
 
-
+    public String getNome() {
+	return nome;
+    }
 }
