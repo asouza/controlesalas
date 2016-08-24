@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form commandName="problema" method="post" action="/problema">
+	<form:form commandName="problemaForm" method="post" action="/computador/${computador.id}/problema">
 		<fieldset>
 			<legend>Número Serie: ${computador.numeroDeSerie} -
 				Numero na Sala: ${computador.numeroNaSala}</legend>
@@ -23,7 +23,9 @@
 				<form:textarea path="descricao" cols="20" rows="10" />
 				<form:errors path="descricao" />
 			</div>
-			<form:hidden path="computador.id" value="${computador.id}"/>
+			
+			<form:hidden path="id" value="${computador.id}"/>
+			
 			<input type="submit" value="Gravar" />
 		</fieldset>
 	</form:form>

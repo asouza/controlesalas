@@ -12,5 +12,7 @@ public interface SalaDao  extends Repository<Sala, Integer>{
 	<S extends Sala> Iterable<Sala> save(Iterable<Sala> entities);
 
 	List<Sala> findAll();
+
+	Sala findOne(Integer id);
 	
 }

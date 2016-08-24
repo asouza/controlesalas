@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Sala {
+public class Sala implements Problematico{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,6 +27,10 @@ public class Sala {
 	public Sala(String numero, Integer quantidadeMaquinas) {
 		this.numero = numero;
 		this.quantidadeMaquinas = quantidadeMaquinas;
+	}
+
+	public Sala(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getQuantidadeMaquinas() {
@@ -51,6 +55,11 @@ public class Sala {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@Override
+	public String getDescricao() {
+		return "Sala "+this.numero;
 	}
 	
 	

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Computador {
+public class Computador implements Problematico{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,6 +34,14 @@ public class Computador {
 	@ManyToOne
 	@NotNull
 	private Sala sala;
+	
+	@Deprecated
+	public Computador() {
+	}
+	
+	public Computador(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;
@@ -83,6 +91,17 @@ public class Computador {
 		this.numeroNaSala = numeroNaSala;
 	}
 	
+	
+	public boolean isProblematico(){
+		//TODO verificar onde fazer essa verificação
+		return false;
+	}
+
+	public String getDescricao() {
+		return "Computador [numeroDeSerie=" + numeroDeSerie + ", numeroNaSala=" + numeroNaSala + ", sala=" + sala.getNumero() + "]";
+	}
+
+
 	
 	
 }
