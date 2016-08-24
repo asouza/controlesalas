@@ -1,6 +1,7 @@
 package br.com.caelum.controlesalas.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.caelum.controlesalas.dao.ComputadorDao;
 import br.com.caelum.controlesalas.dao.SalaDao;
+import br.com.caelum.controlesalas.daos.ProblemaDao;
+import br.com.caelum.controlesalas.dtos.ProblematicoComProblema;
 import br.com.caelum.controlesalas.dtos.ListaComputadoresFiltro;
-import br.com.caelum.controlesalas.modelo.Computador;
+import br.com.caelum.controlesalas.modelo.Problema;
 
 @Controller
 @RequestMapping("/computador")
@@ -20,17 +23,25 @@ public class ComputadorController {
     @Autowired
     private SalaDao salaDao;
     @Autowired
+    private ProblemaDao problemaDao;
+    @Autowired
     private ComputadorDao computadorDao;
+    
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView lista(ListaComputadoresFiltro infoSala) {
 	ModelAndView model = new ModelAndView("computador/lista");
 	if(infoSala != null){
-	    List<Computador> computadores = computadorDao.findBySalaId(infoSala.getSalaId());
-	    model.addObject("computadores", computadores);
+	    List<Problema> problemas = problemaDao.findByComputadorSalaId(infoSala.getSalaId());
+	    
+	    ProblematicoComProblema computadoresComProblema = new ProblematicoComProblema(problemas.stream().collect(Collectors.groupingBy(p -> p.getProblematico())));
+	    
+	    model.addObject("computadores", computadorDao.findBySalaId(infoSala.getSalaId()));
+	    model.addObject("computadoresComProblema", computadoresComProblema);
 	}
 
 	model.addObject("salas", salaDao.findAll());
 	return model;
     }
+
 }

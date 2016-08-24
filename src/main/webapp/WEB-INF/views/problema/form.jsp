@@ -9,7 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form action="/problema" commandName="problema">
+	<form:form action="/problema/${tipo}/${id}/criar" commandName="formProblema">
+		<label for="titulo">Título</label>
+		<form:input path="titulo" />
+		<form:errors path="titulo" />
+		
+		<label for="descricao">Descrição</label>
+		<form:textarea path="descricao" />
+		<form:errors path="descricao" />
 		
 		<input type="submit" value="Gravar" />
 	</form:form>

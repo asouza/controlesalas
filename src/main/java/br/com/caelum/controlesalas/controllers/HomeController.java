@@ -58,7 +58,7 @@ public class HomeController {
 		computadorDao.save(computador);
 	    }
 	}
-	return null;
+	return "sucesso";
     }
     
 }

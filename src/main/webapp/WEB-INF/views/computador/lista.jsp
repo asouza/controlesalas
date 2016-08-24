@@ -23,6 +23,7 @@
 			<th>Configuração</th>
 			<th>Número na Sala</th>
 			<th>Modelo</th>
+			<th>Problema</th>
 			<th>Ações</th>
 		</tr>
 	</thead>
@@ -33,8 +34,12 @@
 				<td>${computador.configuracao}</td>
 				<td>${computador.numeroNaSala}</td>
 				<td>${computador.modelo}</td>
+				<td><c:if test="${computadoresComProblema.temProblema(computador)}">
+					<a href="problema/computador/${computador.id}/detalhes">Ver problemas</a>
+				</c:if>
+				</td>
 				<td>
-					<a href="/problema/computador/${computador.id}/criar"></a>
+					<a href="/problema/computador/${computador.id}/criar">Registrar problema</a>
 				</td>
 			</tr>
 		</c:forEach>
