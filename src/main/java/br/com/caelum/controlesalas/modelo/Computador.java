@@ -156,4 +156,9 @@ public class Computador implements Problematico {
 	return true;
     }
 
+    @Override
+    public String getTipo() {
+        return this.getClass().getSimpleName().toLowerCase();
+    }
+
 }

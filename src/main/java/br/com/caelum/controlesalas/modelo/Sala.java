@@ -68,5 +68,10 @@ public class Sala implements Problematico {
 	    return false;
 	return true;
     }
+    
+    @Override
+    public String getTipo() {
+        return this.getClass().getSimpleName().toLowerCase();
+    }
 
 }

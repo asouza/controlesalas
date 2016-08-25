@@ -35,7 +35,7 @@
 				<td>${computador.numeroNaSala}</td>
 				<td>${computador.modelo}</td>
 				<td><c:if test="${computadoresComProblema.temProblema(computador)}">
-					<a href="problema/computador/${computador.id}/detalhes">Ver problemas</a>
+					<a href="problema/computador/${computador.id}/lista">Ver problemas</a>
 				</c:if>
 				</td>
 				<td>

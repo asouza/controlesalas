@@ -1,5 +1,7 @@
 package br.com.caelum.controlesalas.modelo;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Any;
@@ -36,6 +39,11 @@ public class Problema {
     
     @Enumerated(EnumType.STRING)
     private Status status;
+    
+    @Lob
+    private String comentario;
+    
+    private LocalDateTime dataDeCriacao = LocalDateTime.now();
 
     /**
      * @deprecated hibernate eyes only
@@ -77,5 +85,26 @@ public class Problema {
     
     public Status getStatus() {
 	return status;
+    }
+    
+    public Long getId() {
+	return id;
+    }
+
+    public String getComentario() {
+	return comentario;
+    }
+
+    public void setComentario(String comentario) {
+	this.comentario = comentario;
+    }
+
+    public void setStatus(Status status) {
+	this.status = status;
+    }
+
+    public void soluciona(String comentario) {
+	this.comentario = comentario;
+	this.status = Status.RESOLVIDO;
     }
 }

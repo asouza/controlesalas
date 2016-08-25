@@ -1,4 +1,4 @@
-package br.com.caelum.controlesalas.daos;
+package br.com.caelum.controlesalas.dao;
 
 import java.util.List;
 
@@ -16,6 +16,6 @@ public interface ProblemaDao extends CrudRepository<Problema, Long>{
     @Query(value="select p.* from Problema p where p.problematico = 'sala'", nativeQuery=true)
     public List<Problema> findAllProblemasDasSalas();
     
-    @Query("select p from Problema p where p.problematico.class = :problematico and p.problematico.id = :id")
-    public List<Problema> findByProblematicoAndId(String problematico, Long id);
+    @Query(value="select p.* from Problema p where p.problematico = :problematico and p.problematico_id = :id and p.status = :status", nativeQuery=true)
+    public List<Problema> findByProblematicoAndId(@Param("problematico") String problematico,@Param("id") Long id, @Param("status") String status);
 }
